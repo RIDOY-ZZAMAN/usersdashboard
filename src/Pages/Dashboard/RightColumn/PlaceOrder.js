@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PlaceOrder = ({ item, items, setItems }) => {
-    const products = ['Chicken', 'Fish', 'Meat'];
+    const [productsName, setProductsName] = useState([])
+    useEffect(() => {
+        fetch('./products.json')
+            .then(res => res.json())
+            .then(data => setProductsName(data))
+    }, [])
     const discounts = ['Flat', 'High'];
     const [selected, setSelected] = useState();
     const [selecteddiscount, setSelectedDiscount] = useState();
     const handleComponentsRemove = (item, e) => {
         e.preventDefault();
-
-        const restItems = items.filter(i => i !== item)
-        setItems(restItems)
-
-
+        console.log(item);
+        const index = items.indexOf(item);
+        console.log("Before items", items)
+        if (index > -1) {
+            items.splice(index, 1);
+        }
+        console.log("After items", items)
+        setItems([...items])
     }
     return (
         <div>
@@ -21,23 +29,16 @@ const PlaceOrder = ({ item, items, setItems }) => {
                         {selected} &nbsp;
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        {
-                            products.map(product =>
-                                <li>
-                                    <button onClick={e => {
-                                        setSelected(product)
-
-
-                                    }
-                                    }
-                                        class="dropdown-item"
-                                        type="button">
-                                        {product}
-                                    </button>
-                                </li>
-                            )
-
-                        }
+                        {productsName.map(product => <li>
+                            <button onClick={e => {
+                                setSelected(product.productName)
+                            }
+                            }
+                                class="dropdown-item"
+                                type="button">
+                                {product.productName}
+                            </button>
+                        </li>)}
                     </ul>
                 </div>
                 <input

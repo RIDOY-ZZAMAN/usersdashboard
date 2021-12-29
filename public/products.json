@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "productName": "Chicken"
+    },
+    {
+        "id": 2,
+        "productName": "Fish"
+    },
+    {
+        "id": 3,
+        "productName": "Meat"
+    },
+    {
+        "id": 4,
+        "productName": "Duck"
+    }
+]

@@ -5,7 +5,6 @@ import './RigntColumn.css'
 
 const RightColumn = () => {
     const [items, setItems] = useState([0])
-
     const handleComponetsAdd = (e) => {
         e.preventDefault();
         setItems([...items, items.length]);
@@ -26,7 +25,7 @@ const RightColumn = () => {
             </div>
 
             <form action="">
-                {items.map(item => <PlaceOrder item={item} setItems={setItems} ></PlaceOrder>
+                {items.map(item => <PlaceOrder item={item} items={items} setItems={setItems} ></PlaceOrder>
                 )}
                 <button
                     onClick={e => handleComponetsAdd(e)}
