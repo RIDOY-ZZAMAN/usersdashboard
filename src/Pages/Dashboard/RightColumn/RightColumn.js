@@ -4,6 +4,10 @@ import './RigntColumn.css'
 
 const RightColumn = () => {
     const [items, setItems] = useState([0])
+    const products = ['Chicken', 'Fish', 'Meat'];
+    const discounts = ['Flat', 'High'];
+    const [selected, setSelected] = useState();
+    const [selecteddiscount, setSelectedDiscount] = useState();
     const handleComponetsAdd = (e) => {
         e.preventDefault();
         setItems([...items, items.length]);
@@ -13,11 +17,13 @@ const RightColumn = () => {
         e.preventDefault();
         const restItems = items.filter(i => i !== item)
         setItems(restItems)
+
+
     }
 
     return (
         <div className='container'>
-            <h5 className='text-primary text-center'>Add Products of Customer Choice</h5>
+            <h5 className='text-primary text-center my-2'>Add Products of Customer Choice</h5>
             <div className='d-flex justify-content-between'>
                 <h6>Product Name*</h6>
                 <h6>Product Pricing</h6>
@@ -31,11 +37,26 @@ const RightColumn = () => {
 
             <form action="">
                 {items.map(item => <div className='mt-3 d-flex justify-content-between shadow-sm p-3  bg-body rounded-2' >
-                    <input
-                        className='inputFieldSize'
-                        type="text"
-                        placeholder='Country Chicken'
-                    />
+                    <div class="dropdown">
+                        <button style={{ width: "130px" }} class="btn border-dark dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            {selected} &nbsp;
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            {
+                                products.map(product =>
+                                    <li>
+                                        <button onClick={e =>
+                                            setSelected(product)}
+                                            class="dropdown-item"
+                                            type="button">
+                                            {product}
+                                        </button>
+                                    </li>
+                                )
+
+                            }
+                        </ul>
+                    </div>
                     <input
                         className='inputFieldSize'
                         type="text"
@@ -56,11 +77,26 @@ const RightColumn = () => {
                         type="text"
                         placeholder='Enter Discount'
                     />
-                    <input
-                        className='inputFieldSize'
-                        type="text"
-                        placeholder='Flat'
-                    />
+                    <div class="dropdown">
+                        <button style={{ width: "130px" }} class="btn border-dark dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                            {selecteddiscount} &nbsp;
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            {
+                                discounts.map(discount =>
+                                    <li>
+                                        <button onClick={e =>
+                                            setSelectedDiscount(discount)}
+                                            class="dropdown-item"
+                                            type="button">
+                                            {discount}
+                                        </button>
+                                    </li>
+                                )
+
+                            }
+                        </ul>
+                    </div>
                     <input
                         className='inputFieldSize'
                         type="text"
