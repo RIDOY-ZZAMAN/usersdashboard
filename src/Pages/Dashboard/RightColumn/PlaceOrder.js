@@ -5,8 +5,10 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
     const [price, setPrice] = useState();
     const [FinalPrice, setFinalPrice] = useState()
     const discounts = ['Flat', 'High'];
+    const [discountAmout, setDiscountAmout] = useState();
     const [selected, setSelected] = useState();
     const [selecteddiscount, setSelectedDiscount] = useState();
+    const [isDisabled, setDisabled] = useState(false);
     const handleComponentsRemove = (idx, e) => {
         e.preventDefault();
         document.getElementById(`id-${idx}`).remove();
@@ -17,17 +19,38 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
-
     const productQuantity = 10;
 
     const finalPrice = (quantity, price) => {
-
         setFinalPrice(quantity * price)
+        return quantity * price
+    }
 
+    const discountCalculation = (discountType) => {
+        console.log(discountType);
+        if (discountType === 'High') {
+            const discountAmmout = 20;
+            setDiscountAmout(discountAmmout)
+            const newFinalPrice = FinalPrice - discountAmmout;
+            setFinalPrice(newFinalPrice)
+
+        }
+
+        else if (discountType === 'Flat') {
+            const discountAmmout = 10;
+            setDiscountAmout(discountAmmout)
+            const newFinalPrice = FinalPrice - discountAmmout;
+            setFinalPrice(newFinalPrice)
+
+
+        }
 
 
     }
-
+    const handleSubmit = () => {
+        console.log('Your button was clicked and is now disabled');
+        setDisabled(true);
+    }
 
     return (
         <div>
@@ -41,8 +64,7 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
                             <button onClick={() => {
                                 setSelected(product.productName);
                                 setPrice(product.price);
-                                finalPrice(productQuantity, product.price)
-
+                                finalPrice(productQuantity, product.price);
 
                             }
                             }
@@ -71,7 +93,7 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
                 <input
                     className='inputFieldSize'
                     type="text"
-                    placeholder='Enter Discount'
+                    value={discountAmout}
                 />
                 <div class="dropdown">
                     <button style={{ width: "130px" }} class="btn border-dark dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,8 +103,15 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
                         {
                             discounts.map(discount =>
                                 <li>
-                                    <button onClick={e =>
-                                        setSelectedDiscount(discount)}
+                                    <button onClick={e => {
+                                        setSelectedDiscount(discount)
+                                        discountCalculation(discount)
+                                        handleSubmit()
+
+
+                                    }
+                                    }
+                                        disabled={isDisabled}
                                         class="dropdown-item"
                                         type="button">
                                         {discount}
