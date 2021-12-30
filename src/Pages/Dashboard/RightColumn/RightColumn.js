@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PlaceOrder from './PlaceOrder';
 import './RigntColumn.css'
 
-
 const RightColumn = () => {
     const [items, setItems] = useState([0])
+    console.log(items)
     const handleComponetsAdd = (e) => {
         e.preventDefault();
         setItems([...items, items.length]);
+
     }
 
     return (
@@ -25,7 +26,7 @@ const RightColumn = () => {
             </div>
 
             <form action="">
-                {items.map(item => <PlaceOrder item={item} items={items} setItems={setItems} ></PlaceOrder>
+                {items.map((item, idx) => <PlaceOrder item={item} idx={idx} items={items} setItems={setItems} ></PlaceOrder>
                 )}
                 <button
                     onClick={e => handleComponetsAdd(e)}
