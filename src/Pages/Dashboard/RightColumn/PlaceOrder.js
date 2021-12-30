@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 const PlaceOrder = ({ item, items, setItems, idx }) => {
-    const [products, setProducts] = useState([])
-    useEffect(() => {
-        fetch('./products.json')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-    }, [])
+    const [products, setProducts] = useState([]);
+    const [price, setPrice] = useState();
+    const [FinalPrice, setFinalPrice] = useState()
     const discounts = ['Flat', 'High'];
     const [selected, setSelected] = useState();
     const [selecteddiscount, setSelectedDiscount] = useState();
@@ -14,6 +11,23 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
         e.preventDefault();
         document.getElementById(`id-${idx}`).remove();
     }
+
+    useEffect(() => {
+        fetch('./products.json')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [])
+
+    const productQuantity = 10;
+
+    const finalPrice = (quantity, price) => {
+
+        setFinalPrice(quantity * price)
+
+
+
+    }
+
 
     return (
         <div>
@@ -25,7 +39,10 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         {products.map(product => <li>
                             <button onClick={() => {
-                                setSelected(product.productName)
+                                setSelected(product.productName);
+                                setPrice(product.price);
+                                finalPrice(productQuantity, product.price)
+
 
                             }
                             }
@@ -39,12 +56,12 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
                 <input
                     className='inputFieldSize'
                     type="text"
-                    placeholder='330.00'
+                    value={price}
                 />
                 <input
                     className='inputFieldSize'
                     type="text"
-                    placeholder='100'
+                    value={productQuantity}
                 />
                 <input
                     className='inputFieldSize'
@@ -79,7 +96,7 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
                 <input
                     className='inputFieldSize'
                     type="text"
-                    placeholder='3000'
+                    value={FinalPrice}
                 />
                 <button
                     onClick={(e) => handleComponentsRemove(idx, e)}

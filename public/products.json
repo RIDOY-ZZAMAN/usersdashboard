@@ -1,18 +1,22 @@
 [
     {
         "id": 0,
-        "productName": "Chicken"
+        "productName": "Chicken",
+        "price": "100"
     },
     {
         "id": 1,
-        "productName": "Fish"
+        "productName": "Fish",
+        "price": "200"
     },
     {
         "id": 2,
-        "productName": "Meat"
+        "productName": "Meat",
+        "price": "300"
     },
     {
         "id": 3,
-        "productName": "Duck"
+        "productName": "Duck",
+        "price": "400"
     }
 ]
