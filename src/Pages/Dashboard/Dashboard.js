@@ -7,12 +7,12 @@ const Dashboard = () => {
     return (
         <div>
             <Header></Header>
-            <div class="">
-                <div class="row">
-                    <div class="col-lg-2">
+            <div>
+                <div class="row" style={{ margin: 0 }}>
+                    <div class="col-lg-2" style={{ padding: 0 }} >
                         <LeftColunm></LeftColunm>
                     </div>
-                    <div class="col-lg-10 rightColumn">
+                    <div class="col-lg-10 rightColumn" style={{ padding: '10px' }}>
                         <RightColumn></RightColumn>
                     </div>
                 </div>

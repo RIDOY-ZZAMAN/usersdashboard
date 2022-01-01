@@ -54,8 +54,8 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
 
     return (
         <div>
-            <div id={`id-${idx}`} className='mt-3 d-flex justify-content-between shadow-sm p-3  bg-body rounded-2' >
-                <div class="dropdown">
+            <div id={`id-${idx}`} className='mt-3 d-flex justify-content-between shadow-sm p-3  bg-light rounded-2 ' >
+                <div class="dropdown" style={{ backgroundColor: "white" }}>
                     <button style={{ width: "130px" }} class="btn border-dark dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         {selected} &nbsp;
                     </button>
@@ -95,7 +95,7 @@ const PlaceOrder = ({ item, items, setItems, idx }) => {
                     type="text"
                     value={discountAmout}
                 />
-                <div class="dropdown">
+                <div class="dropdown" style={{ backgroundColor: "white" }}>
                     <button style={{ width: "130px" }} class="btn border-dark dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         {selecteddiscount} &nbsp;
                     </button>
